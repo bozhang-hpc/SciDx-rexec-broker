@@ -19,5 +19,15 @@ optional arguments:
                         The port for listening the termination signal. [0-65535]
 ```
 
+## K8s Deployment
+1. Create a Deployment
+   ```Bash
+   kubectl apply -f k8s/rexec-broker-deployment.yaml -n [namespace]
+   ```   
+2. Expose the broker IP to external client and internal server via Service
+   ```Bash
+   kubectl apply -f k8s/rexec-broker-service.yaml -n [namespace]
+   ```   
+
 ## License
 This project is licensed under the [Apache License 2.0](LICENSE).

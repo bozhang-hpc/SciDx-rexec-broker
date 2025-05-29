@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rexec-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rexec-broker
+  template:
+    metadata:
+      labels:
+        app: rexec-broker
+    spec:
+      containers:
+        - name: rexec-broker
+          image: bozhanghpc/rexec-broker:v05092025
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5559
+              protocol: TCP
+            - containerPort: 5560
+              protocol: TCP
+            - containerPort: 5561
+              protocol: TCP
+          command:
+            - sh
+            - -c
+            - python run_broker.py --client_port 5559 --server_port 5560 --control_port 5561 --debug
+      restartPolicy: Always
